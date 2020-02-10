@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./log/lsportalOddsIngestor.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- daily rollover. Make sure the path matches the one in the file element or else
+       the rollover logs are placed in the working directory. -->
+      <fileNamePattern>./log/lsportalOddsIngestor%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+      <maxFileSize>50MB</maxFileSize>
+      <!-- keep 7 days' worth of history -->
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ERRFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./log/lsportalOddsIngestorError.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>WARN</level>
+    </filter>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- daily rollover. Make sure the path matches the one in the file element or else
+       the rollover logs are placed in the working directory. -->
+      <fileNamePattern>./log/lsportalOddsIngestorError%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxFileSize>50MB</maxFileSize>
+      <!-- keep 7 days' worth of history -->
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILEINGAME" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./log/lsportalOddsIngestorIngameOdds.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- daily rollover. Make sure the path matches the one in the file element or else
+       the rollover logs are placed in the working directory. -->
+      <fileNamePattern>./log/lsportalOddsIngestorIngameOdds%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+      <maxFileSize>50MB</maxFileSize>
+      <!-- keep 7 days' worth of history -->
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="FILEPREGAME" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./log/lsportalOddsIngestorPregameOdds.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <!-- daily rollover. Make sure the path matches the one in the file element or else
+       the rollover logs are placed in the working directory. -->
+      <fileNamePattern>./log/lsportalOddsIngestorPregameOdds%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+      <maxFileSize>50MB</maxFileSize>
+      <!-- keep 7 days' worth of history -->
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.statsperform.lsportal.oddsingestor" level="DEBUG" additivity="false">
+   <appender-ref ref="STDOUT" />
+   <appender-ref ref="FILE" />
+    <appender-ref ref="ERRFILE" />
+  </logger>
+
+  <logger name="com.statsperform.lsportal.oddsingestor.ingame" level="DEBUG" additivity="false">
+   <appender-ref ref="FILEINGAME" />
+  </logger>
+  <logger name="com.statsperform.lsportal.oddsingestor.pregame" level="DEBUG" additivity="false">
+   <appender-ref ref="FILEPREGAME" />
+  </logger>
+
+  <!-- Strictly speaking, the level attribute is not necessary since -->
+  <!-- the level of the root level is set to DEBUG by default.       -->
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+    <appender-ref ref="ERRFILE" />
+  </root>  
+  
+</configuration>

@@ -1,0 +1,21 @@
+lsportal:
+  oddsingestor:
+    pregame:
+      username: "christian.marko@statsperform.com"
+      password: "cf436b45g"
+      virtualHost: "Customers"
+      host: "prematch-rmq.lsports.eu"
+      port: 5672
+      connectionTimeout: 15000
+      heartbeatInterval: 30000
+      queueName: "_2541_"
+      
+    ingame:
+      username: "christian.marko@statsperform.com"
+      password: "cf436b45g"
+      virtualHost: "Customers"
+      host: "inplay-rmq.lsports.eu"
+      port: 5672
+      connectionTimeout: 15000
+      heartbeatInterval: 30000
+      queueName: "_2542_"
