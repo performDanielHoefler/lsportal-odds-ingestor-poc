@@ -1,21 +1,28 @@
 lsportal:
   oddsingestor:
     pregame:
-      username: "christian.marko@statsperform.com"
-      password: "cf436b45g"
-      virtualHost: "Customers"
-      host: "prematch-rmq.lsports.eu"
-      port: 5672
-      connectionTimeout: 15000
-      heartbeatInterval: 30000
-      queueName: "_2541_"
-      
+      rmqConfig:
+        username: "christian.marko@statsperform.com"
+        password: "cf436b45g"
+        virtualHost: "Customers"
+        host: "prematch-rmq.lsports.eu"
+        port: 5672
+        connectionTimeout: 15000
+        heartbeatInterval: 30000
+        queueName: "_2541_"
     ingame:
+      rmqConfig:
+        username: "christian.marko@statsperform.com"
+        password: "cf436b45g"
+        virtualHost: "Customers"
+        host: "inplay-rmq.lsports.eu"
+        port: 5672
+        connectionTimeout: 15000
+        heartbeatInterval: 30000
+        queueName: "_2542_"
+    rest:
       username: "christian.marko@statsperform.com"
       password: "cf436b45g"
-      virtualHost: "Customers"
-      host: "inplay-rmq.lsports.eu"
-      port: 5672
-      connectionTimeout: 15000
-      heartbeatInterval: 30000
-      queueName: "_2542_"
+      scheduleInterval: 7200000
+      packageId: 2542
+      scheduleUrl: "http://inplay.lsports.eu/api/schedule/GetInPlaySchedule?username=%username%&password=%password%&packageid=%packageId%"
