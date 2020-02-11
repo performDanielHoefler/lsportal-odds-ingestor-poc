@@ -1,2 +1,4 @@
 /target/
 /log/
+/rmqConnector.log
+/rmqConnector_error.log
