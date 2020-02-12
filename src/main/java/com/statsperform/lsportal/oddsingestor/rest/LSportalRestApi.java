@@ -4,7 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,8 +42,14 @@ public class LSportalRestApi
 		try
 		{
 			URI url = buildScheduleUri ();
-			InplayScheduleData data = restTemplate.getForObject(url, InplayScheduleData.class);
-			log.info("Object {}", data);
+			ResponseEntity<String> responseEntitityString = restTemplate.getForEntity(url, String.class);
+			String responseString = responseEntitityString.getBody();
+			log.info("Response string: {}", responseString);
+			
+			InplayScheduleData scheduleData = new InplayScheduleData(new JSONObject(responseString));
+			log.info("Header data: type={}, msgGuid={}, ServerTimestamp={}, number of fixtures received: {}",
+					scheduleData.getHeaderData().getType(), scheduleData.getHeaderData().getMsgGuid(), scheduleData.getHeaderData().getServerTimestamp(),
+					scheduleData.getScheduleFixtureData().size());
 		}
 		catch (Exception e)
 		{

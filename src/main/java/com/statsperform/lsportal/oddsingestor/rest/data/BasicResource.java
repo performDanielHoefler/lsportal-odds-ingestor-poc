@@ -5,16 +5,20 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 @Data
-public class Team extends BasicResource
+public class BasicResource
 {
-	@Getter
-	private String position;
-
-	public Team(JSONObject jsonObjTeam) throws JSONException
+	@Getter @Setter
+	private int id;
+	
+	@Getter @Setter
+	private String name;
+	
+	public BasicResource (JSONObject jsonObj) throws JSONException
 	{
-		super(jsonObjTeam);
-		this.position = jsonObjTeam.getString("Position");
+		id = jsonObj.getInt("Id");
+		name = jsonObj.getString("Name");
 	}
 }
