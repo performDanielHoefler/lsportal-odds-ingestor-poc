@@ -20,7 +20,7 @@ public class AMQPConfig
 	
 	@Autowired
 	private LSportalOddsIngestorIngameConfig ingameConfig;
-/*
+
 	@Bean
 	@Qualifier ("pregame_messagelistener")
 	public SimpleMessageListenerContainer messageListenerContainerPregame()
@@ -48,7 +48,7 @@ public class AMQPConfig
 	{
 		return createConnectionFactory(ingameConfig.getRmqConfig());
 	}
-*/
+
 	private SimpleMessageListenerContainer createSimpleMessageListenerContainer(RabbitMqConfig config,
 			MessageListener listener, ConnectionFactory connectionFactory)
 	{
